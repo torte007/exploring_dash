@@ -47,17 +47,17 @@ user_input = [
 ]
 dashboard_layout['top'].children = user_input
 
+# We need to put our html components in the layout attribute of the Dash object. 
+app.layout = html.Div(
+    children=list(dashboard_layout.values())
+)
+
 # First we start with a callback for user input to test everything is running correctly. 
 @app.callback(Output(component_id='my-div', component_property='children'),
             [Input(component_id='myInput', component_property='value')])
 def show_input_value(value):
     children = [html.H1(value)]
     return children
-
-# We need to put our html components in the layout attribute of the Dash object. 
-app.layout = html.Div(
-    children=list(dashboard_layout.values())
-)
 
 if __name__ == '__main__':
     app.run_server(debug=True)
